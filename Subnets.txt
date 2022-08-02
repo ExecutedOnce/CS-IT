@@ -1,4 +1,13 @@
 subnet mask 255.255.255.0 = 192.168.1.0/24
-subnet mask 255.255.255.219 = 192.168.1.0/26    # 255 - 36 (6^2) leaves .219 this allows for a possible '36' internal ips.
-subnet mask 255.0.0.0 = 192.168.1.0/8        # allows for 576 combinations, 24^2
+subnet mask 255.255.255.192 = 192.168.1.0/26    # 256 - 64 (2^6) leaves .219 this allows for a possible '64' internal ips.
+subnet mask 255.0.0.0 = 192.168.1.0/8        # allows for 576 combinations, 2^24
 subnet mask 255.255.255.0 = 192.168.1.0/24
+
+
+if under 192.168.1.64, /26 =  192.168.1.0 -  192.168.1.63
+192.168.1.64/26 = 36 combinations = 192.168.1.64 - 192.168.1.127
+
+
+
+
+# of possible values ^ # of value places
