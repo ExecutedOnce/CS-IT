@@ -1,0 +1,46 @@
+upgrade:
+sudo apt update #get latest versions
+sudo apt search (name) #used to search if unsure
+sudo apt upgrade
+
+
+$ sudo apt upgrade -y
+or 
+$ sudo apt update && sudo apt upgrade -y
+
+
+remove:
+$ sudo apt remove (name)
+$ sudo apt purge (name) #removes configs as well
+
+
+apt list --installed
+apt list --upgradeable
+
+dpkg -s firefox-esr
+dpkg -s gimp
+To quickly check if a program is installed on Linux, you can use the command "dpkg -s" followed 
+by the unique package name for that program. The "-s" flag in dpkg stands for 
+"search," which allows you to search for a program on your machine and check if it's installed. 
+
+sudo apt-get update
+sudo apt-get install -f #force an update of the package manager, using this command
+sudo apt-get install firefox-esr
+
+apt does have some similar command options as apt-get, it’s not backward compatible with apt-get.
+That means it won’t always work if you just replace the apt-get part of an apt-get command with apt.
+https://itsfoss.com/apt-vs-apt-get-difference/
+
+
+sudo <command>: executes a command with administrator rights
+ls <directory>: lists the files in a directory
+mv <old_name> <new_name>: moves or renames a file from the old name to the new name
+tail <file>: shows the last lines of a file
+cat <file>: prints the whole contents of a file
+grep <pattern> <file>: filters the text of a file according to the pattern
+less <file>: lets you browse a file
+
+
+Additionally, you can combine these commands using the | sign. For example:
+
+sudo cat /var/log/syslog | grep error | tail
