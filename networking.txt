@@ -1,0 +1,41 @@
+If checksum doesnt match up in tcp/ip:
+At the IP or ethernet level, if a checksum doesn't compute, all of the data is just discarded. It's up to TCP to determine when to resend this data.
+
+
+
+Information is sent via the physical layer in bits as electrical signals. 
+
+The data link layer then abstracts away information about hardware and connection types. This layer uses an ethernet frame that includes the source and destination mac addresses. 
+
+The network layer encapsulates the ethernet frame in an IP datagram. It uses source and destination IPs for routing and includes a Time To Live field is an 8bit, 1 byte field that is decremented each router hop. When it hits zero it is no longer forwarded by routers. This field exists to prevent a packet being endlessly sent around due to a misconfiguration.
+
+After the TTL field is another 8 bit field (Protocol field) that denotes which transport layer is being used (usually TCP or UDP). This field is followed by a checksum calculated based off the rest of the datagram. If this checksum doesn't match up on the receiving endpoint. Then it is discarded, the sender will not have received an acknowledgement and will attempt to resend the datagram.
+
+Routers use a routing table to determine what network they need to forward traffic to.  For instance any IP that begins with 9.0.0.0 would be an IBM network. 
+
+
+TCP ports allow devices to communicate and ensure data is being accurately sent and received. 
+
+
+
+ Distance-vector protocols are an older standard. A router using a distance-vector protocol basically just takes its routing table, which is a list of every network known to it and how far away these networks are in terms of hops. Then the router sends this list to every neighboring router, which is basically every router directly connected to it. In computer science, a list is known as a vector. 
+ This is why link state protocols were eventually invented. Routers using a link state protocol taking more sophisticated approach to determining the best path to a network. Link state protocols get their name because each router advertises the state of the link of each of its interfaces. These interfaces could be connected to other routers, or they could be direct connections to networks. The information about each router is propagated to every other router on the autonomous system. This means that every router on the system knows every detail about every other router in the system. Each router then uses this much larger set of information and runs complicated algorithms against it to determine what the best path to any destination network might be.
+Play video starting at :5:16 and follow transcript5:16
+Link state protocols require both more memory in order to hold all of this data and also much more processing power. This is because it has to run algorithms against this data in order to determine the quickest path to update the routing tables. As computer hardware has become more powerful and cheaper over the years, link state protocols have mostly made distance vector protocols outdated.
+
+
+a DNS record thats used to redirect traffic from one domain name to another is known as. cname record.
+Administration and definition of TLDs are handled by a non-profit organization ICANN.
+A recursive name server performs a full DNS resolution request.
+Network Address Translation (NAT) where a source port chosen by a client is the same port used by a router? port preservation
+
+new Domain Name System (DNS) server is being configured. Which record type is used to declare a new zone: start of authority
+
+Masquerading is when NAT is used to hide the IP of a computer from another.=
+
+Anycast allows a request to be sent to an appropriate server based on factors, like location. This helps relieve severe congestion.
+Well done! NAT, or Network Address Translation, allows for a device to rewrite the source IP in a packet.
+
+Wohoo! ICANN is responsible for maintaining the global domain name system.
+Correct! A CNAME redirects a DNS resolution attempt from one domain name to another.
+You got it! Anycast lets you route traffic depending on many factors.
