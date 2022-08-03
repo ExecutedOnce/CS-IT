@@ -1,3 +1,4 @@
+cntrl+c = exit command
 upgrade:
 sudo apt update #get latest versions
 sudo apt search (name) #used to search if unsure
@@ -31,6 +32,10 @@ apt does have some similar command options as apt-get, it’s not backward compa
 That means it won’t always work if you just replace the apt-get part of an apt-get command with apt.
 https://itsfoss.com/apt-vs-apt-get-difference/
 
+stop:
+sudo service (name) stop
+sudo service (name) status
+
 
 sudo <command>: executes a command with administrator rights
 ls <directory>: lists the files in a directory
@@ -44,3 +49,7 @@ less <file>: lets you browse a file
 Additionally, you can combine these commands using the | sign. For example:
 
 sudo cat /var/log/syslog | grep error | tail
+
+
+running services:
+sudo service --status-all +=active -=not ?=?
