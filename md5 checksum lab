@@ -1,0 +1,74 @@
+https://googlecoursera.qwiklabs.com/focuses/23133516?parent=lti_session
+
+https://www.coursera.org/learn/it-security/gradedLti/Ki1Lu/hands-on-with-hashing
+
+md5sum file.txt > file.txt.md5
+cat file.txt.md5
+c7a8ef893898f9a6b380eb4ec1e87113  file.txt
+
+More importantly, you can also verify that the hash is correct, and that the original file hasn't been tampered with since the sum was made.
+To do this, enter this command and see the following output,
+which indicates that the hash is valid:
+md5sum -c file.txt.md5
+file text: ok
+
+Next, we'll demonstrate the security of this process by showing how even a single-character change to the file results in a different hash.
+First, you'll create a copy of the text file, and insert a single space at the end of the file. Feel free to use any text-editor that you'd like.
+Head's up that we've included instructions for making this change in Nano. To make a copy of the file, enter this command:
+cp file.txt badfile.txt
+#copies file >
+md5sum badfile.txt > badfile.txt.md5
+Note that the resulting hash is identical to the hash for our original file.txt despite the filenames being different. 
+This is because hashing only looks at the data, not the metadata of the file.
+
+
+nano badfile.txt
+enter space at end
+md5sum -c badfile.txt.md5
+
+change badfile.txt and the md5 check will fail on the hashed file.
+
+To see how different the hash of the edited file is, generate a new hash and inspect it:
+
+md5sum badfile.txt > new.badfile.txt.md5
+cat new.badfile.txt.md5
+
+
+
+
+
+
+
+
+
+
+
+Let's do the same steps, but for SHA1 and SHA256 hashes using the shasum tool. Functionally, the two work in very similar ways,
+and their purpose is the same. But SHA1 and SHA256 offer stronger security than MD5, and SHA256 is more secure than SHA1. This means 
+that it's easier for a malicious third party to attack a 
+system using MD5 than one using SHA1. And because SHA256 is the strongest of the three, it's currently widely used.
+
+To create the SHA1 sum and save it to a file, use this command:
+shasum file.txt > file.txt.sha1
+
+Copied!
+
+View it by printing it to the screen, like you've done before:
+cat file.txt.sha1
+verify:
+shasum -c file.txt.sha1
+FILE:OK
+
+same thing:
+shasum -a 256 file.txt > file.txt.sha256
+
+cat file.txt.sha256
+
+shasum -c file.txt.sha256
+
+
+
+
+
+
+
