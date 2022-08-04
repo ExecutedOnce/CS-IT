@@ -1,0 +1,49 @@
+Explanation of the meanings of these settings:
+
+interface is the name of the interface that will be used for listening to DHCP requests and serving replies; we are setting it to our virtual eth_srv interface.
+
+bind-interfaces means that dnsmasq will operate on that interface only and ignore the others.
+domain is the domain name used on the network.
+
+dhcp-option allows us to give the DHCP clients optional additional information. In this case we are setting the router (also known as default gateway) and the
+dns-server. When the clients receive the DHCP reply they will also receive and apply this configuration.
+
+dhcp-range indicates the range of IPs that are available to be used for dynamic IP assignment as well as the length of the lease. In this case, the whole net
+work (except for the DHCP server) is currently available as part of the dynamic range. We know that we need to change this. The lease is currently set to 24h, which might not be a great idea
+if our network has a lot of devices that are only visible for short periods of time.
+
+
+# This is the interface on which the DHCP server will be listening to.
+interface=eth_srv
+ 
+# This tells this dnsmasq to only operate on that interface and not operate
+# on any other interfaces, so that it doesn't interfere with other running
+# dnsmasq processes.
+bind-interfaces
+ 
+# Domain name that will be sent to the DHCP clients
+domain=mycompany.local
+ 
+# Default gateway that will be sent to the DHCP clients
+dhcp-option=option:router,192.168.1.1
+ 
+# DNS servers to announce to the DHCP clients
+dhcp-option=option:dns-server,192.168.1.1
+ 
+# Dynamic range of IPs to use for DHCP and the lease time.
+dhcp-range=192.168.1.2,192.168.1.254,24h
+
+
+
+
+
+
+
+
+
+dig example.com @localhost uses local dns server to query example.com
+
+
+
+dhclient
+sudo  dhclient --help <<<<<<<<<<<<<<<<<<<<<<<how to find commands/flags
