@@ -1,0 +1,104 @@
+ls --help
+man ls
+ls -l = ownership
+ls -a = hidden
+
+You can find out where you are in relation to the rest of the file system using the pwd command.
+
+pwd
+Copied!
+You can navigate to different directories using the cd command.
+
+cd /path/to/other/directory
+Copied!
+You can check out the contents of a file using the cat command.
+
+cat /path/to/file/file_name
+Copied!
+For large input files, the less commands allows movement within the files. The syntax is similar to that of the cat command, but you can move.
+
+Reading large file using less
+
+less /path/to/file/file_name
+Copied!
+The command will provide you with a scrollable view of the content within the file, up to the end of the file content. Scroll down using "Enter", 
+and exit the view by pressing "q".
+
+mkdir dir1 dir2 dir3
+mkdir can take three options:
+
+-p: allow mkdir to create parent directories if they don't exist
+-m: (mode) used to set permissions of directories during creation
+-v: run command in verbose mode
+
+o remove empty directories, use the rmdir command. The name of the directory to be removed is passed as an argument.
+
+Note: The example commands are for reference only.
+Example 1
+
+rmdir 'dir_name'  'dir_name2'
+rmdir takes only one option, which tells it to remove parent directories if they're also empty. "-p"
+rmdir only removes empty directories. To remove a non-empty directory, the command rm, discussed later in this course, is used.
+
+By default, the touch command is used to change the modification and access times of a file. If the file doesn't exist, the touch command is used to create a file with default permissions.
+
+Let's take a look at an example of how to use the touch command. In the current directory, we can create an empty file called "empty_file":
+
+touch empty_file
+
+The touch command can take the c option to prevent a new file from being created.
+
+Options
+
+-c: do not create file if it doesn't exist
+
+cp = copy
+
+mv
+
+The move command is used to move one or more files or directories into a different location, or rename them to a new name. 
+You're required to pass at least one source and target file names or directories.
+
+rm =remove file(s)
+
+cd or cd~ = home
+cd .. = ^one directory up
+
+Can also be used in commands:
+cd ../pictures
+copy to current directory:
+. # just use a dot for target copy to directory if inside it
+
+You can also use a "dot" to copy or move files to the current directory. In the directory /home/user/Images, 
+we can move the file "Vacation.JPG" into the Pictures directory. To do that, we change into the Pictures directory, then add a "dot" to the mv command as the target.
+
+cd /home/user/Pictures
+Copied!
+mv /home/user/Images/Vacation.JPG .
+Cop
+In the directory /home/user/Movies, there's a folder called "Europe Pictures". We'll move this folder into the correct directory for pictures: /home/user/Pictures. Note the use of the backslash "\" to escape the space between "Europe" and "Pictures" in the directory name, "Europe Pictures".
+
+mv /home/user/Movies/Europe\ Pictures /home/user/Pictures
+
+
+rm and the option -r.
+The option -r tells the command to remove the directory, along with its content recursively.
+
+grep
+
+grep is a super powerful Linux command used to search through files for the occurrence of a string of characters that matches a specified pattern. We can use the command in combination with a bunch of different options and flags for efficient searching.
+
+Options and flags
+
+-r: search recursively
+-w: match the whole word
+-n: only in line number
+-e: match pattern
+--include and --exclude: include and exclude files in the search
+--include-dir and --exclude-dir: include or exclude directories in the search
+
+grep -rw /home/user/Downloads -e "vacation"
+
+
+
+
