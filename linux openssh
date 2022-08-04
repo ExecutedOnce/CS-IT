@@ -1,0 +1,47 @@
+openssl genrsa -out private_key.pem 2048
+Generating RSA private key, 2048 bit long modulus (2 primes)
+................+++++
+..........................................+++++
+e is 65537 (0x010001)
+
+
+This command creates a 2048-bit RSA key, called "private_key.pem". The name of the key is specified after the "-out" flag, and typically ends in ".pem". 
+The number of bits is specified with the last argument. To view your new private key, use "cat" to print it to the screen, just like any other file:
+
+
+public key:
+openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem
+cat public_key.pem
+
+encyrping text using public key: 
+openssl rsautl -encrypt -pubin -inkey public_key.pem -in secret.txt -out secret.enc
+
+Remember that we must use the private key to decrypt the message, since it was encrypted using the public key. Go ahead and decrypt the file, using this command:
+openssl rsautl -decrypt -inkey private_key.pem -in secret.enc
+openssl rsautl -decrypt -inkey private_key.pem -in secret.enc > name.txt #puts into text file.
+
+outputs to command window.
+
+
+to create a hash diggest:
+openssl dgst -sha256 -sign private_key.pem -out secret.txt.sha256 secret.txt
+
+This creates a file called "secret.txt.sha256" using your private key, which contains the hash digest of your secret text file.
+With this file, anyone can use your public key and the hash digest to verify that the file hasn't been modified since you created and hashed it.
+To perform this verification, enter this command:
+openssl dgst -sha256 -verify public_key.pem -signature secret.txt.sha256 secret.txt
+
+
+
+
+
+
+
+
+
+
+
+
+echo allows to output text
+ex:
+echo 'stringhere' > stringfile.txt
