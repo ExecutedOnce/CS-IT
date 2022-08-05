@@ -16,12 +16,19 @@ ls -ld secret_folder/ -d = directory
 drwx-w-r-- 2 root root 4096 Aug  4 11:38 secret_folder/
 ?usr|grp|everyonelese # ? = directory or not, next 3 user perms, next 3 grp perms, next 3 everyones perms.
 
-chmod u+x g+x o+x secret_folder # u=user g=group 0=everone read write x-ecute. 
+chmod u+x g+x o+x secret_folder # u=user(owner) g=group 0=everone read write x-ecute. 
 chmod u-x g-x o-x secret_folder # remove perms
+chmod a+r # gives ALL groups wirte access.
+chmod a+rwx #can do all three.
 
 1: (001) Execute permission.
 2: (010) Write permission.
 4: (100) Read permission.
 The leftmost digit represents the permissions for the owner. The middle digit represents the permissions for the group members.
 The rightmost digit represents the permissions for the others.
+
+
+
+CHANGE FOLDER OWNER:
+sudo chown cook /home/qwiklab/taco # makes cook the ch-owner of the folder.
 
