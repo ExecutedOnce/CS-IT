@@ -1,0 +1,27 @@
+Creating, modifying, and removing file and folder permissions in Linux
+To display ownership and permissions for a file, you can use ls with the -l flag and the name of the file you're interested in with the command ls -l [FILENAME]
+-rw------- 1 student student 16 Aug  4 11:38 important_document
+You can see that it's owned by the "root" user, and that the owner has read and write (but not execute)
+
+
+Now, change the permissions of "important_document" (from the previous step) so that the owner has execute permissions on top of their current permissions.
+To do this, you'll use the chmod command, with the argument 700. The two zeros keep everyone, but the owner, from having any permissions at all, and the seven grants
+all available permissions to the owner
+(including execute). Keep in mind that because the file is owned by "root" you'll need to use sudo:
+
+sudo chmod 700 important_document
+777 would give everyone perms.
+
+ls -ld secret_folder/ -d = directory
+drwx-w-r-- 2 root root 4096 Aug  4 11:38 secret_folder/
+?usr|grp|everyonelese # ? = directory or not, next 3 user perms, next 3 grp perms, next 3 everyones perms.
+
+chmod u+x g+x o+x secret_folder # u=user g=group 0=everone read write x-ecute. 
+chmod u-x g-x o-x secret_folder # remove perms
+
+1: (001) Execute permission.
+2: (010) Write permission.
+4: (100) Read permission.
+The leftmost digit represents the permissions for the owner. The middle digit represents the permissions for the group members.
+The rightmost digit represents the permissions for the others.
+
