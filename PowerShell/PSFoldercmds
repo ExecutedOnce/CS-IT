@@ -1,0 +1,54 @@
+cd C:\Users\Qwiklab\Documents\
+Compress-Archive -Path Earth, Mercury, Venus Planets.zip### (archives)
+#path is required
+
+more info
+PowerShell v5.0 adds Compress-Archive and Expand-Archive cmdlets. The linked pages have full examples, but the gist of it is:
+
+# Create a zip file with the contents of C:\Stuff\
+Compress-Archive -Path C:\Stuff -DestinationPath archive.zip
+
+# Add more files to the zip file
+# (Existing files in the zip file with the same name are replaced)
+Compress-Archive -Path C:\OtherStuff\*.txt -Update -DestinationPath archive.zip
+
+# Extract the zip file to C:\Destination\
+Expand-Archive -Path archive.zip -DestinationPath C:\Destination
+https://stackoverflow.com/questions/1153126/how-to-create-a-zip-archive-with-powershell
+
+Installing messs:
+#########################
+There are alternatives to manually downloading and running installers when you need to install or manage programs on Windows. To install or remove programs, you need administrative privileges. So, open Windows Powershell by searching for it in the Windows start menu, then right-click it and select "Run as Administrator".
+
+In the Windows Powershell terminal, enter the following commands to download and install VLC media player.
+
+$VLC_URL = "https://download.videolan.org/vlc/last/win64/"
+Copied!
+$GET_HTML = Invoke-WebRequest $VLC_URL
+Copied!
+$FILE = $GET_HTML.Links | Select-Object @{Label='href';Expression={@{$true=$_.href}[$_.href.EndsWith('win64.exe')]}} | Select-Object -ExpandProperty href
+Copied!
+$URL = ($VLC_URL+$FILE)
+Copied!
+$DOWNLOAD_DIR = "C:\users\qwiklabs\Downloads\"
+Copied!
+$OUTPUT_FILE = ($DOWNLOAD_DIR+$FILE)
+Copied!
+(new-object System.Net.WebClient).DownloadFile($URL, $OUTPUT_FILE)
+Copied!
+cmd.exe /c $OUTPUT_FILE /S
+Copied!
+Once the installation process is successfully completed, verify that VLC has successfully been installed with the following command:
+
+Get-Package -Name *vlc*
+##########################
+Uninstalling GIMP
+You can use Windows Powershell to uninstall programs. If you've closed your Powershell window, reopen it again by searching for it in the Start Menu, then right-clicking it and selecting "Run as Administrator".
+
+You can uninstall GIMP, a photo editor, using this command:
+
+cmd.exe /c "C:\Program Files\GIMP 2\uninst\unins000.exe" /VERYSILENT /NORESTART
+Copied!
+Once the process finishes, GIMP will no longer be available on your system. You can verify this with the following command and notice that GIMP is not listed:
+
+Get-Package
