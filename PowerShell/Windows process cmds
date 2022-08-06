@@ -1,0 +1,5 @@
+Get-Process -Name "totally_not_malicious"
+taskkill /F /PID [PROCESS ID]
+
+taskkill /f /im razzle*
+kills all windows with razzle (lookup wildcards)
