@@ -1,0 +1,37 @@
+DPKG INSTALL
+First, use dpkg to install a text editor, called Atom. A .deb file is located at "/home/qwiklab/downloads/atom-amd64.deb", which you can install using this command:
+
+sudo dpkg -i /home/qwiklab/downloads/atom-amd64.deb
+
+You can remedy this by using apt to fix the missing dependencies, using this command:
+
+sudo apt install -f
+
+
+EXTRACT/ARCHIVE
+Next, you will extract a .tar archive. The archive "extract_me.tar" is located in "/home/qwiklab/downloads/". Move to that directory, using this command:
+
+cd /home/qwiklab/downloads
+Copied!
+You can use the Linux tar command to extract it using this command:
+
+sudo tar -xvf extract_me.tar
+
+
+ARCHIVING FILES
+You can also use the tar command to do the reverse operation, creating an archive. There are three files in your /home/qwiklab/documents folder named "Earth", "Mercury", and "Venus". Use tar to archive them into the file "Planets.tar" using this command (one line):
+
+tar -cvf Planets.tar --absolute-names /home/qwiklab/documents/Earth /home/qwiklab/documents/Mercury /home/qwiklab/documents/Venus
+
+
+
+INSTALLING FILES
+You can also install programs on Linux, using apt too, which handles dependencies for you to simplify the installation process. You can install the program 7-Zip, using apt, with a simple one-line command:
+
+sudo apt install p7zip-full
+
+REMOVING
+sudo apt remove gimp
+dpkg -s gimp
+
+
