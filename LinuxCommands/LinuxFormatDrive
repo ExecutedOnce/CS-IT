@@ -1,0 +1,94 @@
+Blocks are a layer of storage devices that allow individual access to each independently. They allow programs to access storage without worrying about whether the 
+underlying hardware device is a hard drive, solid state drive, flash drive, etc.
+
+In Linux, you can view block devices and file systems attached to your system using the lsblk command. This command gathers information about all devices attached 
+to the system, and prints them out using a tree-like structure. To view the devices attached to your VM, use the lsblk command.
+
+lsblk
+########################################
+
+The column MOUNTPOINT shows where a block device is mounted.
+part-ition or disk
+
+
+In this case, the MOUNTPOINT is displaying "/etc/hosts" against sdb, which means the second disk (sdb) is mounted at the root of the Linux file system tree.
+Thus, the files you're seeing on your system right now are from this disk.
+
+
+Optionally, you can view disks mounted on the system using the df command. This command is normally used to display the amount of space available on the file system. 
+It lists all block devices with the available space on them. Use the -h option to display file sizes in human readable format.
+
+df -h
+
+You can display partition information using the fdisk command. You can also use the -l option to list partitions in the block. You can pass a device name to the fdisk
+command to list the partitions contained in that device.
+
+sudo fdisk -l
+
+To list partitions contained in /dev/sdb, pass /dev/sdb to the fdisk command.
+
+sudo fdisk -l /dev/sdb
+
+
+Go ahead and start fdisk in interactive mode by passing the name of the disk you want to partition. In this lab, we'll partition /dev/sda
+
+Note: We will partition the disk that's not currently mounted. You should select dev/sdb if /dev/sda is where the operating system is mounted, and /dev/sda otherwise. You can still partition the disk even when the operating system is running from it, but a reboot will be required in order for the partition changes you make to take place.
+Start fdisk by passing the disk you want to partition as the parameter.
+
+sudo fdisk /dev/[SECOND DRIVE]
+
+
+(use m for help)
+You can use p to show details about partitions on the disk.
+Enter q to exit interactive mode when you are finished exploring.
+
+
+To create a new partition, the command control n is used. However, since all the space on the disk is currently allocated, you'll need to first free up space by deleting the default partitions.
+
+Use the d command control to delete the default partitions. When you issue the d command control, fdisk asks you to enter the number of partitions you want to delete. Since you have twelve partitions, fdisk automatically selects the last partition by default, and pressing Enter deletes the last partition. Repeat this process until you delete all the twelve partitions.
+
+Command (m for help): d
+Partition number (1-12, default 12): 
+Partition 12 has been deleted.
+Command (m for help): d
+Partition number (1-11, default 11): 
+Partition 11 has been deleted.
+Command (m for help): d
+
+
+You're now able to create your new partitions. Enter the command control for creating a new partition, n.
+
+You'll then need to provide the starting sector (memory location) of the new partition, from where you want to allocate. Here, press Enter to select the default value 2048.
+
+Command (m for help): n
+Partition number (1-128, default 1): 
+First sector (34-20971486, default 2048): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-20971486, default 20971486): 
+Provide the last sector of the new partition, up to where you want to allocate. The difference between the first and last sectors makes up the total size of the partition. Disk sector represents units used to measure the size on disks. Each sector stores a fixed amount of data. In lots of hard disks, for example, a sector stores 512 bytes. To create the first 1GB partition, enter 2097200 (divide the original partition by 10).
+############dividing last by first gives rough GB size
+
+################ divide the last sector filesize by 10. 
+hit t to change partition type, l lists all types.
+Up to this point, you've just been editing the partition table in memory. You can use the q command here to quit fdisk without committing changes to the disk. You can also update your partitions by using the 
+
+d and n commands 
+
+to remove and add new partitions.
+You can also use the v command here to verify your changes before proceeding.
+
+f you're satisfied with the changes you've made so far, you can commit them to the disk by using the w command.
+Next, you'll create different file systems in the partitions you just created. You'll do this by using the command mkfs in Linux
+
+|-sdb1      8:17   0  5.9G  0 part
+|-sdb2      8:18   0   16M  0 part   <<this one
+sudo mkfs -t ext4 /dev/[SECOND DRIVE]2 #sdb2*
+
+You can now mount /dev/sda2 to a location on the file system to start accessing files on it. Mount it on the directory /home/my_drive.
+
+sudo mount /dev/[SECOND DRIVE]2 /home/my_drive
+You can now mount /dev/sda2 to a location on the file system to start accessing files on it. Mount it on the directory /home/my_drive.
+
+|-sdb1      8:17   0 1023M  0 part 
+`-sdb2      8:18   0    9G  0 part /home/my_drive
+
+
