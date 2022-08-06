@@ -1,0 +1,9 @@
+The ps -aux command allows you to list all currently running processes on a Linux machine. However, the list of processes is often super long, which makes finding a specific process pretty tough. To filter the processes you're interested in, you can pipe the output of ps through grep.
+ps -aux | grep "totally_not_malicious"
+sudo kill [PiD]
+
+terminate multiple
+ps -aux | grep "razzle"
+
+sudo kill [pid]
+pkill -f "name"
