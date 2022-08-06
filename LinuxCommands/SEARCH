@@ -1,0 +1,3 @@
+ls -l search perms
+ls -r recursive
+du search all du -abh human readible a=all b=sizes
